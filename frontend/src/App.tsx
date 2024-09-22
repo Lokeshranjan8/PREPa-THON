@@ -1,13 +1,23 @@
-
-import './index.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Landing from "./routes/Landing";
+import Login from "./routes/Login";
 
 function App() {
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Landing/>
+    },
+    {
+      path: '/login',
+      element: <Login/>
+    }
+  ])
+
   return (
-    <div className="bg-slate-600">
-      hello wolrd 
-      
-    </div>
-  );
+    <RouterProvider router={router}/>
+  )
 }
 
 export default App;

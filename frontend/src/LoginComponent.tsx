@@ -12,7 +12,7 @@ function LoginComponent() {
     loginWithRedirect({
     });
   };
-
+//0366
   return (
     <div>
       <header>

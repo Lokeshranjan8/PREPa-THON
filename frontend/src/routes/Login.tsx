@@ -1,25 +1,19 @@
+<<<<<<< HEAD
 import { AuroraBackground } from "../Components/ui/aurora";
 import { LoginForm } from "../Components/LoginForm";
 import { useAuth0 } from "@auth0/auth0-react";
+=======
+import { AuroraBackground } from "../components/ui/aurora";
+import { LoginForm } from "../components/LoginForm";
+>>>>>>> 8feed97df0b9aa3c3a6e2032ab252bbc93a3d39a
 const Login = () => {
-  const { isAuthenticated, logout, user } = useAuth0();
-
   return (
     <div className="w-screen h-screen relative flex flex-col justify-center">
-      {!isAuthenticated ? (
-        <>
-          <LoginForm />
-          <AuroraBackground
-            className="-z-10 absolute inset-0"
-            children={undefined}
-          />
-        </>
-      ) : (
-        <div>
-          <p>Welcome, {user?.name}</p>
-          <button onClick={() => logout()}>Logout</button>
-        </div>
-      )}
+      <LoginForm />
+      <AuroraBackground
+        className="-z-10 absolute inset-0"
+        children={undefined}
+      />
     </div>
   );
 };

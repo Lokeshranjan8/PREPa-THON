@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { AuroraBackground } from "../Components/ui/aurora";
+import { AuroraBackground } from "../components/ui/aurora";
 import { Link } from "react-router-dom";
 
 const Landing = () => {

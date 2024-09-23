@@ -3,10 +3,15 @@ const cors = require('cors');
 const fs = require('fs');
 const csv = require('csv-parser');
 const { Client } = require('pg');
-
 const app = express();
+
+
+
 app.use(cors());
 const port = 5000;  
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -62,9 +67,35 @@ const insertBatchData = async (batchData) => {
   }
 };
 
+
+//get all companies present in a country 
+app.get('/companies/country/:country', async (req, res) => {
+  const countryName = req.params.country;  // Get country from the URL parameter
+  const query = 'SELECT * FROM company_data WHERE country = $1';  // SQL query to find companies by country
+
+  try {
+      const result = await client.query(query, [countryName]);
+      if (result.rows.length > 0) {
+          res.json(result.rows);  // Return the companies from the database as JSON
+      } else {
+          res.status(404).json({ message: `No companies found in ${countryName}` });
+      }
+  } catch (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
+
+
+
+
 // Read and insert data from CSV with batching
 app.get("/insert_data", (req, res) => {
-  //res.status(200).json({ message: "Data will  inserted successfully" });
+  res.status(200).json({ message: "Data will  inserted successfully" });
   let batch = [];
   fs.createReadStream("mock.csv")
     .pipe(csv())

@@ -5,5 +5,16 @@
     "express": "^4.21.0",
     "pg": "^8.13.0",
     "xml2js": "^0.6.2"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

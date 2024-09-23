@@ -1,5 +1,5 @@
-import { AuroraBackground } from "../components/ui/aurora";
-import { LoginForm } from "../components/LoginForm";
+import { AuroraBackground } from "../Components/ui/aurora";
+import { LoginForm } from "../Components/LoginForm";
 import { useAuth0 } from "@auth0/auth0-react";
 const Login = () => {
   const { isAuthenticated, logout, user } = useAuth0();

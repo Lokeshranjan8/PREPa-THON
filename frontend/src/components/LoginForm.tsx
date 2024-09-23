@@ -1,15 +1,18 @@
 import React from "react";
-import { Label } from "../components/ui/label";
-import { Input } from "../components/ui/input";
+import { Label } from "../Components/ui/label";
+import { Input } from "../Components/ui/input";
 import { tn } from "../utils/cn";
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
 import { useAuth0 } from "@auth0/auth0-react";
+
+
 export function LoginForm() {
     
   const { loginWithRedirect} = useAuth0();
 
   const handleGoogleLogin = () => {
-    loginWithRedirect({});
+    loginWithRedirect({
+    });
   };
 
   const handleOtherSocialLogin = () => {

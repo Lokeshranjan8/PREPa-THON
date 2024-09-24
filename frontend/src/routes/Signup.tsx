@@ -1,9 +1,9 @@
 import { AuroraBackground } from "../components/ui/aurora";
-import { LoginForm } from "../components/ui/LoginForm";
-const Login = () => {
+import { SignupForm } from "../components/ui/SignupForm";
+const Signup = () => {
   return (
     <div className="w-screen h-screen relative flex flex-col justify-center">
-      <LoginForm />
+      <SignupForm />
       <AuroraBackground
         className="-z-10 absolute inset-0"
         children={undefined}
@@ -12,4 +12,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

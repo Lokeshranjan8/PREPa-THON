@@ -86,6 +86,47 @@ app.get('/companies/country/:country', async (req, res) => {
   }
 });
 
+//with greater diversity
+app.get('/companies/diversity/:country', async (req,res) => {
+  const country=req.params.country;
+  const query = `
+        WITH avg_diversity_per_country AS (
+            SELECT 
+                country,
+                AVG(diversity) AS avg_diversity
+            FROM 
+                company_data
+            WHERE 
+                country = $1  -- Filter for the selected country
+            GROUP BY 
+                country
+        )
+        SELECT 
+            c.*
+        FROM 
+            company_data c
+        JOIN 
+            avg_diversity_per_country a
+        ON 
+            c.country = a.country
+        WHERE 
+            c.diversity > a.avg_diversity
+        AND 
+            c.country = $1;  -- Filter for the selected country
+  `;
+  
+  try{
+    const result=await client.query(query,[country]);
+    res.status(200).json(result.rows);
+
+  }
+  catch(err){
+    console.error('Error executing query',err);
+    res.status(500).json({error:'Internal Server Error'});
+  }
+
+})
+
 
 
 

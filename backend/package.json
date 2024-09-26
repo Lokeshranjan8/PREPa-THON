@@ -8,6 +8,7 @@
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.0",
+    "prisma": "^5.20.0",
     "xml2js": "^0.6.2"
   },
   "scripts": {

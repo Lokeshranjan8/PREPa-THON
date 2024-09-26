@@ -34,7 +34,7 @@ export function LoginForm() {
     e.preventDefault(); // Prevent default form submission
     console.log(formData);
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}login`, {
         method: "POST", // HTTP method
         headers: {
           "Content-Type": "application/json", // Send as JSON

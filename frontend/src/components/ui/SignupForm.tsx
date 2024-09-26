@@ -36,7 +36,7 @@ export function SignupForm() {
     e.preventDefault(); // Prevent default form submission
     console.log(formData);
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/signup`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}signup`, {
         method: "POST", // HTTP method
         headers: {
           "Content-Type": "application/json", // Send as JSON

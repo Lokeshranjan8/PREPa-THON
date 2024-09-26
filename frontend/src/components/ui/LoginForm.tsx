@@ -4,6 +4,7 @@ import { Label } from "./label";
 import { Input } from "./input";
 import { tn } from "../../utils/cn";
 import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import toast, { Toaster } from "react-hot-toast";
 
 interface FormData {
   username: string;
@@ -13,7 +14,7 @@ interface FormData {
 
 export function LoginForm() {
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // State for form data
   const [formData, setFormData] = useState<FormData>({
@@ -33,33 +34,38 @@ const navigate = useNavigate();
     e.preventDefault(); // Prevent default form submission
     console.log(formData);
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         method: "POST", // HTTP method
         headers: {
           "Content-Type": "application/json", // Send as JSON
         },
         body: JSON.stringify(formData), // Stringify the form data
       });
-
-      if(response.ok){ // status code:[200,299]
-        const data = await response.json(); // Parse JSON response
-        console.log(data);
-        navigate('/display');
-
-      }else if(response.status===404){
+      await response.json(); // Parse JSON response
+      if (response.ok) { // status code:[200,299]
+        // console.log(data);
+        setTimeout(() => {
+          navigate('/display');
+        }, 2000)
+        toast.success("User logged in");
+      } else if (response.status === 404) {
         console.log("User not found")
-      }else if(response.status===401){
+        toast("User not found")
+      } else if (response.status === 401) {
         console.log("Invaild credentials")
+        toast.error("Invalid credentals")
+      } else if (response.status === 500) {
+        toast.error("Server error, try later")
       }
-
     } catch (error) {
-      console.log("Error during signup:", error);
-      // toast.error("Something went wrong.");
+      console.log("Error during logging in:", error);
+      toast.error("Something went wrong, open the console!");
     }
   };
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+      <Toaster />
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Log in to your account
       </h2>
@@ -80,7 +86,7 @@ const navigate = useNavigate();
             />
           </LabelInputContainer>
         </div>
-        
+
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
           <Input
@@ -97,7 +103,7 @@ const navigate = useNavigate();
           type="submit"
           onClick={formSubmit}
         >
-          Sign up &rarr;
+          Login &rarr;
           <BottomGradient />
         </button>
 
@@ -107,7 +113,7 @@ const navigate = useNavigate();
           <button
             className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="submit"
-            // onClick={}
+          // onClick={}
           >
             <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
@@ -118,7 +124,7 @@ const navigate = useNavigate();
           <button
             className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="submit"
-            // onClick={Signin}
+          // onClick={Signin}
           >
             <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">

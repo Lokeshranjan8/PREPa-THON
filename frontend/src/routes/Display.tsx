@@ -1,4 +1,3 @@
-"use client";
 import { AuroraBackground } from "../components/ui/aurora";
 import { PlaceholdersAndVanishInput } from "../components/ui/placeholders-and-vanish-input";
 

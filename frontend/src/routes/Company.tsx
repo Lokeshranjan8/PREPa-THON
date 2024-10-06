@@ -24,9 +24,13 @@ const Company = () => {
         (item) => item.Country === company.Country && item.Company !== company.Company
     );
 
+    const higherDiversity = data.filter(
+        (item) => item.Diversity > company.Diversity && item.Company !== company.Company
+    )
+
     return (
         <>
-            <main>
+            <main className="overflow-x-auto">
                 <header>
 
                     <h1 className="mt-2 text-white text-center text-4xl font-medium tracking-tight md:text-4xl">
@@ -35,8 +39,8 @@ const Company = () => {
                 </header>
 
                 <h2
-                    className="mt-8 text-slate-400 text-left text-[12px] font-medium tracking-tight md:text-2xl">
-                    Other Companies from {company.Country}:
+                    className="mt-8 text-slate-400 ml-4 text-left text-[12px] font-medium tracking-tight md:text-2xl">
+                    1. Other Companies from {company.Country}:
                     <ul className="flex flex-wrap gap-2 mt-12">
                         {otherCompanies.length > 0 ? (
                             otherCompanies.map((item, index) => (
@@ -51,7 +55,25 @@ const Company = () => {
                             <p>No other companies found from {company.Country}</p>
                         )}
                     </ul>
+                    <br />
+                    <h3>
+                        2. Companies with higher diversity are :
+
+                        <ul className="flex flex-wrap gap-2 mt-12">
+
+                            {higherDiversity.map((item, index) => (
+                                <Link key={index} to={`/display/${item.Company}`} >
+                                    <li>
+                                        {item.Company} ({item.Country})
+                                    </li>
+                                </Link>
+                            ))}
+                        </ul>
+
+
+                    </h3>
                 </h2>
+
             </main>
             <AuroraBackground children={undefined} className="-z-10 absolute inset-0 overflow-hidden" />
         </>

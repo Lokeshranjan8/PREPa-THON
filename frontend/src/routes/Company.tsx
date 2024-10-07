@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import data from '../data.json';
 import ComputationTwoBar from "../components/ComputationTwoBar";
+import ComputationStockPriceGraph from "../components/ComputationStockPriceGraph";
 
 const Company = () => {
     // Get the company name from the URL params and provide a default value if undefined
@@ -69,6 +70,8 @@ const Company = () => {
               </li>
             ))}
           </ul>
+          <br />
+          <ComputationStockPriceGraph/>
         </>
       )}
     </section>
